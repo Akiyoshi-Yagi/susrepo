@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>
+	企業個別ページ    
+</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'analytics/styles/each_company.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="contents">
+	<div class="company_info">
+		<h2>企業名　：　{{ company.company_name }}</h2>
+		<p>証券コード　：　{{ company.stock_code }}</p>
+		<p>業種　：　{{ company.industry_classification }}</p>
+		<p>有価証券報告書 提出日　：　{{ company.submission_date }}</p>
+	</div>
+
+	<div class="sentence">
+		<p>
+		</br>
+	    </br>
+			{{ company.company_name }}と、{{ company.industry_classification }}業界の競合他社とのサステナビリティ章の文字数を比較したのが以下の表である。</br>
+			{{ company.industry_classification }}業界内企業の、売上高別の平均とESGスコアが高い企業の平均をまとめている。</br>
+		</br>
+		</br>	
+			売上大：2500億円以上、売上中：1000億以上2500億円未満、売上小：1000億円未満</br>
+			ESGスコアが高い企業：MSCIスコアがA以上
+		</br>
+		</br>
+		※が書いてある項目が記載必須項目。詳しくはこちら
+		https://www.fsa.go.jp/policy/kaiji/sustainability01.pdf
+		</p>
+	</div>
+	
+	<table class="char_num_table">
+		<tr>
+			<!-- 横軸のヘッダー -->
+			<th class="table-header" colspan="2">{{ company.industry_classification }}業界内比較</th>
+			<th class="table-header">{{ company.company_name }}</th>
+			<th class="table-header">売上高小</br>企業平均</th>
+			<th class="table-header">売上高中</br>企業平均</th>
+			<th class="table-header">売上高大</br>企業平均</th>
+			<th class="table-header">ESGスコア高</br>企業平均</th>
+		</tr>
+		<!-- 縦軸のヘッダー -->
+		<tr>
+			<th class="compamy_num_column" colspan="2">企業数（社）</th>
+			<td class="compamy_num_column" > - </td>
+			<td class="compamy_num_column">{{cn_sale_s.company_number}}</td>
+			<td class="compamy_num_column">{{cn_sale_m.company_number}}</td>
+			<td class="compamy_num_column">{{cn_sale_l.company_number}}</td>
+			<td class="compamy_num_column">{{cn_esg_score.company_number}}</td>
+		</tr>
+		<tr>
+			<th class="major_class" rowspan="7">各項目の</br>文字数（字）</th>
+			<th>サステナビリティ章 全文※</th>
+			<td> {{company.total_word_count}} </td>
+			<td>{{cn_sale_s.total_word_count}}</td>
+			<td>{{cn_sale_m.total_word_count}}</td>
+			<td>{{cn_sale_l.total_word_count}}</td>
+			<td>{{cn_esg_score.total_word_count}}</td>
+		</tr>
+		<tr><th>（１）ガバナンス※</th>
+			<td> {{company.governance_word_count}} </td>
+			<td>{{cn_sale_s.governance_word_count}}</td>
+			<td>{{cn_sale_m.governance_word_count}}</td>
+			<td>{{cn_sale_l.governance_word_count}}</td>
+			<td>{{cn_esg_score.governance_word_count}}</td>
+		</tr>
+		<tr>
+			<th>（２）戦略</th>
+			<td> {{company.strategy_word_count}} </td>
+			<td>{{cn_sale_s.strategy_word_count}}</td>
+			<td>{{cn_sale_m.strategy_word_count}}</td>
+			<td>{{cn_sale_l.strategy_word_count}}</td>
+			<td>{{cn_esg_score.strategy_word_count}}</td>
+		</tr>
+		<tr><th>（（２）の一部）</br>人材育成・社内環境整備方針※</th>
+			<td> {{company.talent_strategy_word_count}} </td>
+			<td>{{cn_sale_s.talent_strategy_word_count}}</td>
+			<td>{{cn_sale_m.talent_strategy_word_count}}</td>
+			<td>{{cn_sale_l.talent_strategy_word_count}}</td>
+			<td>{{cn_esg_score.talent_strategy_word_count}}</td>
+		</tr>
+		<tr><th>（３）リスク管理※</th>
+			<td> {{company.risk_management_word_count}} </td>
+			<td>{{cn_sale_s.risk_management_word_count}}</td>
+			<td>{{cn_sale_m.risk_management_word_count}}</td>
+			<td>{{cn_sale_l.risk_management_word_count}}</td>
+			<td>{{cn_esg_score.risk_management_word_count}}</td>
+		</tr>
+		<tr>
+			<th>（４）指標及び目標</th>
+			<td> {{company.indicators_word_count}} </td>
+			<td>{{cn_sale_s.indicators_word_count}}</td>
+			<td>{{cn_sale_m.indicators_word_count}}</td>
+			<td>{{cn_sale_l.indicators_word_count}}</td>
+			<td>{{cn_esg_score.indicators_word_count}}</td>
+		</tr>
+		<tr>
+			<th>（（４）の一部）</br>人的資本の目標及び進捗状況※</th>
+			<td> {{company.talent_indicators_word_count}} </td>
+			<td>{{cn_sale_s.talent_indicators_word_count}}</td>
+			<td>{{cn_sale_m.talent_indicators_word_count}}</td>
+			<td>{{cn_sale_l.talent_indicators_word_count}}</td>
+			<td>{{cn_esg_score.talent_indicators_word_count}}</td>
+		</tr>
+	</table>
+
+	<div class="sentence">
+		<p>
+			続いて、サステナビリティ章に記載されている文章を解析することで、各社がどのような取り組みを行いそれを有価証券報告書に反映させているのかを分析した。</br>
+			こちらも{{ company.industry_classification }}業界内企業の、売上高別の平均とESGスコアが高い企業の平均をまとめている。</br>
+		</br>
+		</br>	
+			売上大：2500億円以上、売上中：1000億以上2500億円未満、売上小：1000億円未満</br>
+			ESGスコアが高い企業：MSCIスコアがA以上
+		</br>
+		</br>
+			この分析から、</br>
+		</br>
+			１）競合他社と比較した時に自社ができていない取り組みは何か</br>
+			２）取り組みはできているけれど有価証券報告書に記載できていないのは何か</br>
+		</br>
+			が明確となる。
+			
+		</p>
+	</div>
+
+	<table>
+		<th class="table-header" colspan="2">{{ company.industry_classification }}業界内比較</th>
+		<th class="table-header">{{ company.company_name }}</th>
+		<th class="table-header">売上高小</br>企業平均</th>
+		<th class="table-header">売上高中</br>企業平均</th>
+		<th class="table-header">売上高大</br>企業平均</th>
+		<th class="table-header">ESGスコア高</br>企業平均</th>
+		</tr>
+		<!-- 縦軸のヘッダー -->
+		<tbody>
+			<tr>
+				<th class="compamy_num_column" colspan="2">企業数（社）</th>
+				<td class="compamy_num_column"> - </td>
+				<td class="compamy_num_column">{{wr_sale_s.company_number}}</td>
+				<td class="compamy_num_column">{{wr_sale_m.company_number}}</td>
+				<td class="compamy_num_column">{{wr_sale_l.company_number}}</td>
+				<td class="compamy_num_column">{{wr_esg_score.company_number}}</td>
+			</tr>
+			<tr>
+				<th class="major_class" rowspan="15">各取り組みを行なっている企業の割合</th>
+				<th>企業価値向上を考慮した戦略・目標設定をしている</th>
+				{% if company.strategy_for_value_enhancement %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.strategy_for_value_enhancement}}</td>
+				<td>{{wr_sale_m.strategy_for_value_enhancement}}</td>
+				<td>{{wr_sale_l.strategy_for_value_enhancement}}</td>
+				<td>{{wr_esg_score.strategy_for_value_enhancement}}</td>
+			</tr>
+			<tr>
+				<th>サステナビリティ推進の文脈でDXに取り組んでいる</th>
+				{% if company.dx_in_sustainability_context %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.dx_in_sustainability_context}}</td>
+				<td>{{wr_sale_m.dx_in_sustainability_context}}</td>
+				<td>{{wr_sale_l.dx_in_sustainability_context}}</td>
+				<td>{{wr_esg_score.dx_in_sustainability_context}}</td>
+			</tr>
+			<tr>
+				<th>サステナ委員会・ワーキンググループを設置している</th>
+				{% if company.sustainability_committee_established %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.sustainability_committee_established}}</td>
+				<td>{{wr_sale_m.sustainability_committee_established}}</td>
+				<td>{{wr_sale_l.sustainability_committee_established}}</td>
+				<td>{{wr_esg_score.sustainability_committee_established}}</td>
+			</tr>
+			<tr>
+				<th>マテリアリティを策定している</th>
+				{% if company.materiality_established %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.materiality_established}}</td>
+				<td>{{wr_sale_m.materiality_established}}</td>
+				<td>{{wr_sale_l.materiality_established}}</td>
+				<td>{{wr_esg_score.materiality_established}}</td>
+			</tr>
+			<tr>
+				<th>サプライチェーンの透明化・効率化に取り組んでいる</th>
+				{% if company.supply_chain_transparency_and_efficiency %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.supply_chain_transparency_and_efficiency}}</td>
+				<td>{{wr_sale_m.supply_chain_transparency_and_efficiency}}</td>
+				<td>{{wr_sale_l.supply_chain_transparency_and_efficiency}}</td>
+				<td>{{wr_esg_score.supply_chain_transparency_and_efficiency}}</td>
+			</tr>
+			<tr>
+				<th>気候変動を考慮した事業展開をしている</th>
+				{% if company.climate_change_considered_in_business %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.climate_change_considered_in_business}}</td>
+				<td>{{wr_sale_m.climate_change_considered_in_business}}</td>
+				<td>{{wr_sale_l.climate_change_considered_in_business}}</td>
+				<td>{{wr_esg_score.climate_change_considered_in_business}}</td>
+			</tr>
+			<tr>
+				<th>気候関連財務情報開示（TCFD）を行っている</th>
+				{% if company.climate_related_financial_disclosure %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.climate_related_financial_disclosure}}</td>
+				<td>{{wr_sale_m.climate_related_financial_disclosure}}</td>
+				<td>{{wr_sale_l.climate_related_financial_disclosure}}</td>
+				<td>{{wr_esg_score.climate_related_financial_disclosure}}</td>
+			</tr>
+			<tr>
+				<th>温室効果ガス削減に取り組んでいる</th>
+				{% if company.greenhouse_gas_reduction_efforts %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.greenhouse_gas_reduction_efforts}}</td>
+				<td>{{wr_sale_m.greenhouse_gas_reduction_efforts}}</td>
+				<td>{{wr_sale_l.greenhouse_gas_reduction_efforts}}</td>
+				<td>{{wr_esg_score.greenhouse_gas_reduction_efforts}}</td>
+			</tr>
+			<tr>
+				<th>カーボンニュートラルに取り組んでいる</th>
+				{% if company.strategy_for_value_enhancement %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.strategy_for_value_enhancement}}</td>
+				<td>{{wr_sale_m.strategy_for_value_enhancement}}</td>
+				<td>{{wr_sale_l.strategy_for_value_enhancement}}</td>
+				<td>{{wr_esg_score.strategy_for_value_enhancement}}</td>
+			</tr>
+			<tr>
+				<th>スコープ３まで範囲に入れた検討ができている</th>
+				{% if company.scope_3_inclusion_in_analysis %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.scope_3_inclusion_in_analysis}}</td>
+				<td>{{wr_sale_m.scope_3_inclusion_in_analysis}}</td>
+				<td>{{wr_sale_l.scope_3_inclusion_in_analysis}}</td>
+				<td>{{wr_esg_score.scope_3_inclusion_in_analysis}}</td>
+			</tr>
+			<tr>
+				<th>障がい者の雇用に取り組んでいる</th>
+				{% if company.disability_employment_efforts %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.disability_employment_efforts}}</td>
+				<td>{{wr_sale_m.disability_employment_efforts}}</td>
+				<td>{{wr_sale_l.disability_employment_efforts}}</td>
+				<td>{{wr_esg_score.disability_employment_efforts}}</td>
+			</tr>
+			<tr>
+				<th>エンゲージメントの調査を行なっている</th>
+				{% if company.engagement_survey_conducted %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.engagement_survey_conducted}}</td>
+				<td>{{wr_sale_m.engagement_survey_conducted}}</td>
+				<td>{{wr_sale_l.engagement_survey_conducted}}</td>
+				<td>{{wr_esg_score.engagement_survey_conducted}}</td>
+			</tr>
+			<tr>
+				<th>人権を尊重した社内制度、研修を行なっている</th>
+				{% if company.internal_systems_respecting_human_rights %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.internal_systems_respecting_human_rights}}</td>
+				<td>{{wr_sale_m.internal_systems_respecting_human_rights}}</td>
+				<td>{{wr_sale_l.internal_systems_respecting_human_rights}}</td>
+				<td>{{wr_esg_score.internal_systems_respecting_human_rights}}</td>
+			</tr>
+			<tr>
+				<th>ダイバーシティを尊重した人事制度を採用している</th>
+				{% if company.diversity_respecting_hr_policy %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.diversity_respecting_hr_policy}}</td>
+				<td>{{wr_sale_m.diversity_respecting_hr_policy}}</td>
+				<td>{{wr_sale_l.diversity_respecting_hr_policy}}</td>
+				<td>{{wr_esg_score.diversity_respecting_hr_policy}}</td>
+			</tr>
+			<tr>
+				<th>女性管理職の積極登用をおこなっている</th>
+				{% if company.proactive_hiring_of_female_managers %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				<td>{{wr_sale_s.proactive_hiring_of_female_managers}}</td>
+				<td>{{wr_sale_m.proactive_hiring_of_female_managers}}</td>
+				<td>{{wr_sale_l.proactive_hiring_of_female_managers}}</td>
+				<td>{{wr_esg_score.proactive_hiring_of_female_managers}}</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<div class="sentence">
+		<p>
+			以上の分析をもとに、有価証券報告書のサステナビリティ章を記述するのが良いでしょう。
+			しかしながら、一から文章を記述するのは大変です。そこで、サステナビリティ章の文章を自動生成するアプリケーションを利用してみましょう。
+		</p>
+	</div>
+	<div class="generation-container">
+        <form method="get" action="{% url 'generation' %}">
+            <button type="submit" class="generation-button">生成する</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

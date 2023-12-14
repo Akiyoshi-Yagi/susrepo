@@ -1,0 +1,555 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>
+	文章生成  
+</title>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'analytics/styles/generation.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<div class="contents">
+    <div class="title">
+    </br>
+    </br>
+        <h1>サステナビリティ文章生成アプリ</h1>
+    </br>
+    </br>
+    </div>
+    {% if session %}
+    <div class="form">
+    <form  method="post" action="{% url 'generation' %}">
+        {% csrf_token %}
+        <div class="industry-selection">
+            <div>
+            </br>
+                <h3>サステナビリティ文章を生成する業界を選んでください。
+                </h3>
+            </br>
+            </div>
+            <select name="set_industry" id="industrySelect" onchange="fetchDefaultSettings()">
+                <option value="{{section1}}">{{section1.industry}}</option>
+                {% for industry in industries %}
+                    <option  value="{{ industry }}">{{ industry }}</option>
+                {% endfor %}
+            </select>
+            <div>
+            </br>
+                <h3>
+                    サステナビリティの文章を、金融庁が公表している有価証券報告書の記載事項である </br></br>
+                    １）ガバナンス ２）戦略 3）人材育成や社内環境整備方針 ４）リスク管理 ５）指標及び目標 ６）人的資本の目標 </br></br>
+                    の６つの項目に分けて生成する。</br>
+                </br>
+                    それぞれの項目を生成するためには、</br>
+                </br>
+                    ステップ１）右側枠の例文を見て記載内容のイメージを掴む。</br>
+                    ステップ２）左側枠のキーワードに関連する御社の取り組みをできるだけ具体的に記載する。</br>
+                    ステップ３）生成ボタンを押すと、右側に御社の取り組みを反映した文章が生成される。</br>
+                    ステップ４）右側の枠で生成された文章をベースに細部の編集を行う</br>
+                </br>
+
+                    6つの項目を合わせた文章はページ最下部で参照可能である。</br>
+                </h3>
+            </br>
+        </div>
+        <div class="each_contianer">    
+            <h2 class="section" name="term1" id="1_0" >{{section1.heading}}</h2>
+            <div class="container">
+                <div class="left-side">
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="1_1">{{section1.category1}}</h2>
+                        <div class="input-area">
+                            <textarea name="category1_1" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="1_2">{{section1.category2}}</h2>
+                        <div class="input-area">
+                            <textarea name="category1_2" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="1_3">{{section1.category3}}</h2>
+                        <div class="input-area">
+                            <textarea name="category1_3" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="1_4">{{section1.category4}}</h2>
+                        <div class="input-area">
+                            <textarea name="category1_4" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="1_5">{{section1.category5}}</h2>
+                        <div class="input-area">
+                            <textarea name="category1_5" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    <div class="button-container">  
+                        <input  type="submit" name="generation1" value="文章生成">    
+                    </div>
+                </div>
+                
+                <div class="right-side">
+                    <div class="output-area" id="outputText">
+                        <h2 class="theme" >生成された、{{section1.heading}}に関する事項の文章</h2>
+                        <div class="output-text">
+                            <textarea id="1_6" name="category1_6"  placeholder="小売業界の指標及び目標のデフォルトの文章">
+                                {% if response_sentence_1 %}
+                                     {{ response_sentence_1 }}
+                                {% else %}
+                                     
+                                     当社は、持続可能な企業活動を推進し、中長期的な企業価値の向上を図ることを目指しております。その一環として、ガバナンスの強化に努めており、取締役会においては独立した外部の専門家を複数含む構成を採ることで、内部だけでは見えにくい問題点の発見や、経営判断の客観性の確保を行なっております。具体的には、外部の専門性を活かした監査やリスクマネジメント機能の強化により、経営の透明性を高め、株主及びその他のステークホルダーへの説明責任を果たす体制を整えております。
+
+サステナビリティ委員会に関しては、当社の企業活動全体のサステナビリティに関する方針や戦略を検討し、具体的な方策を講じる委員会の設置を行い、社内外の専門知識を生かした取り組みを進めております。この委員会は、環境への影響低減、社会との共存共栄、そして経済的な持続可能性を踏まえた多角的な施策を立案し、実行に移す役割を担っております。
+
+気候関連財務情報開示においては、将来の気候変動リスクと機会を踏まえた経営情報の開示に取り組んでいます。この開示は、投資家を始めとするステークホルダーが当社の気候変動対応の姿勢を理解し、適切な投資判断を行うための重要なインプットとなります。現在、当社は約50%の情報を開示しており、今後も透明性の更なる向上を目指して参ります。
+
+ステークホルダーとの関係性に関しては、当社はコミュニケーションを非常に重要視しています。顧客、供給業者、地域社会など多岐にわたるステークホルダーとの対話を積極的に行い、それぞれの利害を平衡させながら良好な関係を構築しております。この関係性は、持続可能な事業運営を実現するための基盤であり、相互の信頼関係に基づいた協働を進めています。
+
+その他には、コンプライアンスへの取り組みは、当社の事業の基盤であると徹底しており、法規制の遵守はもちろん、倫理的な価値観を共有し、高い道徳規範を持って行動することを社員一人ひとりに求めています。このように当社は、全社的な取り組みとしてガバナンス構造の継続的な強化を推し進めており、これによりサステナビリティを経営のコアに位置付けることができています。これらの取り組みをもって、ステークホルダーの皆様に信頼される企業を目指して参ります。
+                                <!-- {{section1.default_sentence}} -->
+                                {% endif %}
+
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+        <div class="each_contianer">    
+            <h2 class="section" name="term2" id="2_0" >{{section2.heading}}</h2>
+            <div class="container">
+                <div class="left-side">
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="2_1">{{section2.category1}}</h2>
+                        <div class="input-area">
+                            <textarea name="category2_1" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="2_2">{{section2.category2}}</h2>
+                        <div class="input-area">
+                            <textarea name="category2_2" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="2_3">{{section2.category3}}</h2>
+                        <div class="input-area">
+                            <textarea name="category2_3" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="2_4">{{section2.category4}}</h2>
+                        <div class="input-area">
+                            <textarea name="category2_4" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="2_5">{{section2.category5}}</h2>
+                        <div class="input-area">
+                            <textarea name="category2_5" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    <div class="button-container">  
+                        <input  type="submit" name="generation2" value="文章生成">    
+                    </div>
+                </div>
+                
+                <div class="right-side">
+                    <div class="output-area" id="outputText">
+                        <h2 class="theme" >生成された、{{section2.heading}}に関する事項の文章</h2>
+                        <div class="output-text">
+                            <textarea id="2_6" name="category2_6"  placeholder="小売業界の指標及び目標のデフォルトの文章">
+                                {% if response_sentence_2 %}
+                                     {{ response_sentence_2 }}
+                                {% else %}
+                                     
+                                     当社は、サステナビリティに重点を置いた経営戦略を採用し、企業責任の充足と社会的価値の創出を図っております。多様性の推進においては、女性管理職率を現状の20%から2025年までに40%まで引き上げることを目標とし、積極的な人材育成と平等な昇進の機会を提供しています。また、障害を持つ人材にも門戸を広げ、彼らが得意とする分野で活躍できるような職場環境を整備し、障害者の積極雇用を推進しています。
+
+働きがいのある社内環境づくりに関しては、GEM（GLOBAL EMPLOYEE MOVEMENT）活動を主軸に据え、社員一人ひとりが自発的に改善案を提案できる文化を醸成しております。この取り組みを通じ、ワーク・ライフ・バランスの推進や、従業員の能力開発をサポートし、個々人が自信を持って働ける環境を目指しています。
+
+環境負荷の削済みにおいては、環境に配慮した包装紙の活用を積極的に進めています。従来の包装材に代わり、リサイクル可能で地球にやさしい素材を選択し、包装廃棄物の削減とリサイクル率の向上を目指しています。この取り組みは、顧客からも高い評価を受けており、環境への意識が高い現代社会において、企業イメージの向上にも寄与しています。
+
+サプライチェーンの見直しに関しては、人権に配慮した生産者とのみ取引を行うことで、良心的な製品調達を強化しています。サプライヤーに対する厳格な審査基準を設け、定期的な監査を通じて彼らの労働環境や人権が尊重されていることを確認しています。これにより、顧客に安心して商品を提供できるだけでなく、サプライチェーン全体の社会的責任を推進しております。
+
+その他には、地域社会との協力を深め、共生の関係を構築することも当社の主要な戦略です。社会貢献活動への参加や、教育プログラムの支援を通じて、地域経済の発展に寄与しながら、企業としての社会的責務を果たしています。また、消費者教育にも力を入れ、持続可能な消費行動が社会に定着するよう啓発活動を展開しています。
+
+当社のサステナビリティ戦略は持続可能なビジネスの構築のみならず、より良い社会の実現に向けた取り組みでもあります。これらの活動を通じて、ステークホルダーの信頼を維持・向上させ、中長期的な企業価値の向上を目指します。
+                                <!-- {{section2.default_sentence}} -->
+                                {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="each_contianer">
+            <h2 class="section" name="term3" id="3_0" >{{section3.heading}}</h2>
+            <div class="container">
+                <div class="left-side">
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="3_1">{{section3.category1}}</h2>
+                        <div class="input-area">
+                            <textarea name="category3_1" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="3_2">{{section3.category2}}</h2>
+                        <div class="input-area">
+                            <textarea name="category3_2" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="3_3">{{section3.category3}}</h2>
+                        <div class="input-area">
+                            <textarea name="category3_3" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="3_4">{{section3.category4}}</h2>
+                        <div class="input-area">
+                            <textarea name="category3_4" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="3_5">{{section3.category5}}</h2>
+                        <div class="input-area">
+                            <textarea name="category3_5" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    <div class="button-container">  
+                        <input  type="submit" name="generation3" value="文章生成">    
+                    </div>
+                </div>
+                
+                <div class="right-side">
+                    <div class="output-area" id="outputText">
+                        <h2 class="theme" >生成された、{{section3.heading}}に関する事項の文章</h2>
+                        <div class="output-text">
+                            <textarea id="3_6" name="category3_6"  placeholder="小売業界の指標及び目標のデフォルトの文章">
+                                {% if response_sentence_3 %}
+                                     {{ response_sentence_3 }}
+                                {% else %}
+                                    
+                                     当社は、持続可能な経営を目指し、企業ガバナンスの充実に努めています。特に、経営層と従業員間のコミュニケーションの強化、透明性の高い意思決定プロセスの確立、およびリスク管理の徹底を重視しています。具体的には、経営会議の定期的な開催により、企業の方針や戦略についての情報を社内外に公開し、ステークホルダーの信頼を獲得することに努めています。
+
+女性・外国人・障がい者の積極登用においては、多様性と包摂性を企業文化の根幹に据え、これらのグループが働きやすい環境を整えることに注力しています。例えば、女性管理職の比率を現在の20％から2025年までに30％に引き上げる目標を設定し、育児と仕事の両立支援策を強化しています。また、外国人従業員のための日本語研修プログラムや、障がい者従業員に対する特別な職場調整を実施しています。
+
+健康経営に関しては、従業員の心身の健康が企業の持続的な成長に不可欠であると考え、様々な取り組みを行っています。具体的には、年に一度の健康診断の完全費用負担、メンタルヘルス対策としてのカウンセリングサービスの提供、また職場内での定期的なフィットネス活動の実施などが挙げられます。
+
+エンゲージメントサーベイにおいては、従業員の満足度とエンゲ
+                                 <!-- {{section3.default_sentence}} -->
+                                {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="each_contianer">
+            <h2 class="section" name="term4" id="4_0" >{{section4.heading}}</h2>
+            <div class="container">
+                <div class="left-side">
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="4_1">{{section4.category1}}</h2>
+                        <div class="input-area">
+                            <textarea name="category4_1" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="4_2">{{section4.category2}}</h2>
+                        <div class="input-area">
+                            <textarea name="category4_2" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="4_3">{{section4.category3}}</h2>
+                        <div class="input-area">
+                            <textarea name="category4_3" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="4_4">{{section4.category4}}</h2>
+                        <div class="input-area">
+                            <textarea name="category4_4" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="4_5">{{section4.category5}}</h2>
+                        <div class="input-area">
+                            <textarea name="category4_5" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    <div class="button-container">  
+                        <input  type="submit" name="generation4" value="文章生成">    
+                    </div>
+                </div>
+                
+                <div class="right-side">
+                    <div class="output-area" id="outputText">
+                        <h2 class="theme" >生成された、{{section4.heading}}に関する事項の文章</h2>
+                        <div class="output-text">
+                            <textarea id="4_6" name="category4_6"  placeholder="小売業界の指標及び目標のデフォルトの文章">
+                                {% if response_sentence_4 %}
+                                     {{ response_sentence_4 }}
+                                {% else %}
+                                当社は、持続可能性の観点からリスク管理を重要な戦略的アジェンダと位置づけており、気候関連リスクに関しては積極的に取り組んでいます。気候変動に伴う業界全体の変動に対処するため、当社はエネルギー効率の向上と温室効果ガス排出量の削減に焦点を当てています。我々は、新たな持続可能なエネルギー源への移行を検討し、再生可能エネルギーの導入を検討しており、これにより環境への影響を低減し、気候変動に対する強固な姿勢を維持しています。
+
+コンプライアンスリスクに関しては、法的および規制上の変更に迅速に対応できるよう、リスク管理委員会を設置しています。この委員会は、法令順守と倫理的なビジネス慣行を促進し、法的リスクを最小化するために体制を整備しており、当社の長期的な持続可能性に貢献しています。
+
+リスク管理委員会は、リスクの特定、評価、およびモニタリングに焦点を当て、特にサプライチェーンにおけるリスクに関して慎重に対処しています。サプライチェーンの持続可能性を確保し、業界特有の課題に対処するため、当社は供給業者との緊密な協力を強化し、透明性を高めています。また、サプライチェーンにおける人権侵害や労働条件の改善にも注力しており、これにより持続可能な価値供給を確保しています。
+
+リスク最小化の方針に関しては、当社は事業全体でリスク軽減策を積極的に推進しています。これには、環境への影響を減少させ、エコフレンドリーな製品とサービスの開発を含む多くの取り組みが含まれます。また、リスク最小化のためのリスクアセスメントとシナリオ分析を実施し、予測されるリスクに対する備えを強化しています。
+
+その他には、業界特有のサステナビリティの取り組み内容も積極的に推進しています。たとえば、循環型経済への移行を支援し、廃棄物削減のためのイニシアティブに参加しています。また、社会的責任プログラムを通じて地域社会への貢献を強化し、顧客との持続可能な関係を築いています。
+
+総括すると、当社は持続可能性に関するリスク管理を真剣に取り組み、気候関連リスクとコンプライアンスリスクを特に重視しています。リスク管理委員会の存在とサプライチェーンの透明性向上により、業界特有の課題にも積極的に対処し、リスク最小化のための努力を継続的に行っています。持続可能なビジネスモデルの構築と社会への貢献を通じて、当社は将来の持続可能性を確保し、ステークホルダーに価値を提供し続ける決意を持っています。
+                                     <!-- {{section4.default_sentence}} -->
+                                {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="each_contianer">
+            <h2 class="section" name="term5" id="5_0" >{{section5.heading}}</h2>
+            <div class="container">
+                <div class="left-side">
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="5_1">{{section5.category1}}</h2>
+                        <div class="input-area">
+                            <textarea name="category5_1" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="5_2">{{section5.category2}}</h2>
+                        <div class="input-area">
+                            <textarea name="category5_2" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="5_3">{{section5.category3}}</h2>
+                        <div class="input-area">
+                            <textarea name="category5_3" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="5_4">{{section5.category4}}</h2>
+                        <div class="input-area">
+                            <textarea name="category5_4" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="5_5">{{section5.categor5}}</h2>
+                        <div class="input-area">
+                            <textarea name="category5_5" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    <div class="button-container">  
+                        <input  type="submit" name="generation5" value="文章生成">    
+                    </div>
+                </div>
+                
+                <div class="right-side">
+                    <div class="output-area" id="outputText">
+                        <h2 class="theme" >生成された、{{section5.heading}}に関する事項の文章</h2>
+                        <div class="output-text">
+                            <textarea id="5_6" name="category5_6"  placeholder="小売業界の指標及び目標のデフォルトの文章">
+                                {% if response_sentence_5 %}
+                                    {{ response_sentence_5 }}
+                                {% else %}
+                                当社は、持続可能性の指標・目標を策定し、積極的に取り組んでおります。多様性に関する目標においては、社内の多様性と包摂性を強化し、女性役員の割合を5年間で現在の20%から30%に引き上げることを目指しています。また、障がい者雇用率を現在の3%から5%に向上させ、包括的な労働力を構築するための措置を講じています。
+
+社内環境整備に関する目標に関しては、2025年までに全ての主要施設でエネルギー効率を向上させ、再生可能エネルギーの利用率を50%に増加させることを計画しております。廃棄物削減のためのリサイクル率も向上させ、環境への負荷を低減する取り組みを進めています。
+
+気候変動対策に関する目標においては、2050年までに当社のカーボンフットプリントを実質ゼロにすることを宣言し、温室効果ガス排出量の削減に向けて積極的に取り組んでいます。具体的には、製品のライフサイクル全体で排出量を削減し、サプライチェーンのエコフレンドリーなパートナーシップを強化して、気候変動に対する貢献を追求しています。
+
+コーポレートガバナンスに関する目標に関しては、透明性と説明責任を強化し、取締役会の独立性を高めることを重要視しています。当社は、持続可能な経営を推進し、ステークホルダーの利益を適切に考慮するために、ガバナンスの改善に取り組んでいます。さらに、社外取締役の比率を増やし、独立した監査委員会を設立して、適切なコーポレートガバナンスを確保しています。
+
+その他には、業界特有のサステナビリティの取り組み内容も推進し、商品のサステナビリティを向上させ、顧客に持続可能な選択肢を提供しています。また、地域社会への貢献と社会的責任活動を通じて、持続可能な未来の構築に寄与することにも力を入れております。当社は、これらの目標を達成するために、経営陣から従業員まで全てのステークホルダーと協力し、持続可能性の実現に向けて前進していく覚悟であります。
+                                    <!-- {{section5.default_sentence}} -->
+                               {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="each_contianer">
+            <h2 class="section" name="term6" id="6_0" >{{section6.heading}}</h2>
+            <div class="container">
+                <div class="left-side">
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="6_1">{{section6.categor1}}</h2>
+                        <div class="input-area">
+                            <textarea name="category6_1" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="6_2">{{section6.categor2}}</h2>
+                        <div class="input-area">
+                            <textarea name="category6_2" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="6_3">{{section6.categor3}}</h2>
+                        <div class="input-area">
+                            <textarea name="category6_3" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="6_4">{{section6.categor4}}</h2>
+                        <div class="input-area">
+                            <textarea name="category6_4" placeholder="貴社の独自の取り組み内容.."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area default-text">
+                        <h2 class="theme" id="6_5">{{section6.categor5}}</h2>
+                        <div class="input-area">
+                            <textarea name="category6_5" placeholder="貴社の独自の取り組み内容..."></textarea>
+                        </div>
+                    </div>
+                    <div class="button-container">  
+                        <input  type="submit" name="generation6" value="文章生成">    
+                    </div>
+                </div>
+                
+                <div class="right-side">
+                    <div class="output-area" id="outputText">
+                        <h2 class="theme" >生成された、{{section6.heading}}に関する事項の文章</h2>
+                        <div class="output-text">
+                            <textarea id="6_6" name="category6_6"  placeholder="小売業界の指標及び目標のデフォルトの文章">
+                                {% if response_sentence_6 %}
+                                    {{ response_sentence_6 }}
+                                {% else %}
+
+当社は、人的資本の重要性を認識し、持続可能な成長を支えるために積極的に取り組んでいます。多様性の推進に関する目標においては、性別、年齢、文化的背景、性的指向などの多様な要素を尊重し、包摂的な職場環境を構築することを重視しています。2025年までに、女性管理職の割合を現在の25%から35%に引き上げ、多様性をリーダーシップに反映させる取り組みを進めています。
+
+働きやすい社内環境整備に関しては、従業員の健康と幸福を促進し、ワークライフバランスをサポートするために努力しています。柔軟な労働条件の提供や、リモートワークのオプションの拡充など、従業員のニーズに合った働き方を推進しています。さらに、育児休暇や介護休暇の充実化など、家庭と仕事の両立を支援する取り組みを行っています。
+
+組織文化の変革においては、リーダーシップのトレーニングと倫理的なビジネス慣行の強化に力を入れています。持続可能な価値観を従業員全体に普及させ、個々の貢献が評価される文化を醸成するために、コミュニケーションと協力を重視しています。また、イノベーションと創造性を奨励し、新しいアイデアを育てるプログラムも展開しております。
+
+社員エンゲージメントの向上に関しては、従業員の意見を積極的に収集し、フィードバックに基づいて改善策を実行しています。従業員が自己実現し、成長できる環境を提供し、キャリア開発プログラムや継続的なスキルトレーニングを通じて、職場での満足度を高めています。
+
+その他には、業界特有のサステナビリティの取り組み内容も盛り込んでおり、商品のライフサイクル評価や環境への影響削減に取り組んでいます。従業員への持続可能性教育や意識向上キャンペーンを通じて、サステナビリティへの取り組みを共有し、共感を得ています。
+
+総括すると、当社は人的資本の重要性を認識し、多様性の推進、働きやすい社内環境整備、組織文化の変革、社員エンゲージメントの向上など、人材育成と幸福度向上に向けた目標と取り組みを積極的に進めています。業界特有のサステナビリティ課題にも対処し、持続可能な未来を築くために努力し続けています。
+                                    <!-- {{section6.default_sentence}} -->
+                               {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    </div>
+    <div class="generated_sentence">
+        <h2>生成された文章</h2>
+        <h4 class="innercontents" id="combinedText">
+            {% if response_sentence_6 %}
+                {{ response_sentence_1 }}+{{ response_sentence_2 }}+{{ response_sentence_3 }}+{{ response_sentence_4 }}+{{ response_sentence_5 }}+{{ response_sentence_6 }}
+            {% else %}
+                {{section1.default_sentence}}+{{section2.default_sentence}}+{{section3.default_sentence}}+{{section4.default_sentence}}+{{section5.default_sentence}}+{{section6.default_sentence}}
+            {% endif %}
+
+        </h4>
+    </div>
+
+    {% else %}
+    ログイン後利用可能です。
+    <a href="{% url 'login' %}">ログインはこちら</a>
+    {% endif %}
+    
+</div>
+
+<script>
+// JavaScriptコード
+function fetchDefaultSettings() {
+    const industry = document.getElementById('industrySelect').value;
+    fetch(`get-settings/?industry=${industry}`)
+        .then(response => response.json())
+        .then(data => {
+            const settingsList = document.getElementById('settingsList'+ String(1));
+            var i = 1;
+            
+            data.settings.forEach(setting => {
+                const heading = document.getElementById(String(i)+"_0");
+                const categorytitle1 = document.getElementById(String(i)+"_1");
+                const categorytitle2 = document.getElementById(String(i)+"_2");
+                const categorytitle3 = document.getElementById(String(i)+"_3");
+                const categorytitle4 = document.getElementById(String(i)+"_4");
+                const categorytitle5 = document.getElementById(String(i)+"_5");
+                const defaultsentence = document.getElementById(String(i)+"_6");
+                // settingsList.innerHTML = '';
+
+                heading.innerHTML = `<strong>${setting.heading}</strong>`;
+                categorytitle1.innerHTML = `<strong>${setting.category1}</strong>`;
+                categorytitle2.innerHTML = `<strong>${setting.category2}</strong>`;
+                categorytitle3.innerHTML = `<strong>${setting.category3}</strong>`;
+                categorytitle4.innerHTML = `<strong>${setting.category4}</strong>`;
+                categorytitle5.innerHTML = `<strong>${setting.category5}</strong>`;
+                defaultsentence.innerHTML = `<strong>${setting.default_sentence}</strong>`;
+                
+                i += 1;
+                
+            });
+            
+        });
+}
+function updateCombinedText() {
+        var text1 = document.getElementById('1_6').value;
+        var text2 = document.getElementById('2_6').value;
+        var text3 = document.getElementById('3_6').value;
+        var text4 = document.getElementById('4_6').value;
+        var text5 = document.getElementById('5_6').value;
+        var text6 = document.getElementById('6_6').value;
+        document.getElementById('combinedText').textContent = text1 + " " + text2 + " " + text3 + " " + text4 + " " + text5 + " " + text6;
+    }
+
+    document.getElementById('1_6').addEventListener('input', updateCombinedText);
+    document.getElementById('2_6').addEventListener('input', updateCombinedText);
+    document.getElementById('3_6').addEventListener('input', updateCombinedText);
+    document.getElementById('4_6').addEventListener('input', updateCombinedText);
+    document.getElementById('5_6').addEventListener('input', updateCombinedText);
+    document.getElementById('6_6').addEventListener('input', updateCombinedText);
+    
+    // 初期表示時にもテキストを更新
+    updateCombinedText();
+
+</script>
+
+
+{% endblock %}

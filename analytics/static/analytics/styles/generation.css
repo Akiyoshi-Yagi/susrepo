@@ -1,0 +1,168 @@
+
+.contents{
+    margin-top: 100px;
+    width:80%;
+}
+.container {
+    display: flex;
+}
+
+.input-area {
+    border: 2px solid #000;
+    margin-bottom: 20px;
+}
+.left-side, .right-side {
+    flex: 1;
+    padding: 10px 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.default-text {
+    padding: 10px;
+    margin: 0;
+    height: 80%;
+}
+.input-area {
+    flex: 1;
+}
+
+.section {
+    margin: 0 -20px;
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.theme {
+    display: block;
+    font-size: 1em;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+p {
+    display: block;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    resize: none;
+    padding: 20px;
+    margin: 0;
+}
+
+.output-area {
+    background-color: #e0e0e0;
+    padding: 10px;
+    height: calc(100%);
+    border: 2px solid #000;
+    margin-bottom: 20px;
+
+}
+
+.output-text {
+    background-color: #e0e0e0;
+    padding: 0px;
+    height: calc(100% - 40px);
+    border: 2px solid #000;
+    margin-bottom: 20px;
+    
+}
+
+.industry-selection{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* プルダウン全体のスタイル */
+.industry-selection select {
+
+    width: 100%; /* 幅をコンテナに合わせる */
+    padding: 10px; /* 内側の余白 */
+    border-radius: 10px; /* 角の丸み */
+    border: 2px solid #87cefa; /* ボーダーのスタイル */
+    background-color: white; /* 背景色 */
+    font-size: 16px; /* フォントサイズ */
+    color: #333; /* フォントの色 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウ */
+    cursor: pointer; /* カーソルスタイル */
+}
+
+/* プルダウンのホバー時のスタイル */
+.industry-selection select:hover {
+    border-color: #1a8cff; /* ボーダーの色を変更 */
+}
+
+/* プルダウンのフォーカス時のスタイル */
+.industry-selection select:focus {
+    outline: none; /* デフォルトのアウトラインを削除 */
+    box-shadow: 0px 0px 6px #87ceeb; /* ボックスシャドウのスタイルを変更 */
+}
+
+.button-container {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.button-container input[type=submit] {
+    background-color: #40a9eb; /* 緑色の背景 */
+    color: white; /* 白色のテキスト */
+    padding: 15px 32px; /* 上下と左右のパディング */
+    text-align: center; /* テキストを中央揃えに */
+    text-decoration: none; /* テキストの装飾を無効に */
+    display: inline-block; /* インラインブロックとして表示 */
+    font-size: 20px; /* フォントサイズを大きく */
+    margin: 4px 2px; /* マージン */
+    cursor: pointer; /* カーソルをポインターに */
+    border: none; /* ボーダー無し */
+    border-radius: 8px; /* 角を丸く */
+    box-shadow: 0 4px #999; /* 影をつける */
+}
+
+.button-container input[type=submit]:hover {
+    background-color: #1327da; /* ホバー時の背景色を変更 */
+    box-shadow: 0 5px #666; /* ホバー時の影を変更 */
+    transform: translateY(-2px); /* 上に少し移動 */
+}
+
+.each_contianer{
+    margin-bottom: 100px;
+}
+
+.generated_sentence{
+    flex: 1;
+    padding: 10px 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #e0e0e0;
+    padding: 10px;
+    height: calc(100%);
+    border: 2px solid #000;
+    margin-bottom: 20px;
+}
+
+.innercontents{
+    background-color: white;
+    padding: 0px;
+    height: calc(100% - 40px);
+    border: 2px solid #000;
+    margin-bottom: 20px;
+
+}

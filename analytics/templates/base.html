@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'analytics/styles/base.css' %}">
+    {% block title %}
+
+    {% endblock %}
+
+ 
+    
+</head>
+<body>
+    <div class="body_all">
+        <div class="navbar">
+
+            
+
+            {% if session %}
+            <a href="{% url 'logout' %}">ログアウトはこちら</a>
+
+            {% else %}
+            <a href="{% url 'login' %}">ログインはこちら</a>
+            {% endif %}
+            <a href="{% url 'generation' %}">文章生成</a>
+            <a href="{% url 'search' %}">文章分析</a>
+            
+        </div>
+        {% block content %}
+        {% if messages %}
+            {% for message in messages %}
+                <div id="logout-message" class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <!-- ホームページ固有の内容 -->
+        {% endblock %}
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    // ポップアップメッセージを表示し、数秒後に消えるようにする
+    window.onload = function() {
+        setTimeout(function() {
+            var messageElement = document.getElementById('logout-message');
+            if (messageElement) {
+                messageElement.style.display = 'none';
+            }
+        }, 3000);  // 3秒後にメッセージを非表示にする
+    };
+</script>
