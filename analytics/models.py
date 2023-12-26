@@ -23,7 +23,7 @@ class Company(models.Model):
     market_product_classification = models.CharField(max_length=50, blank=True, null=True)
     esg_score = models.CharField(max_length=10, blank=True, null=True)
     grade_a_or_above = models.BooleanField(blank=True, null=True)
-    # sustainability_approach = models.TextField(blank=True, null=True)
+    sustainability_approach = models.TextField(blank=True, null=True)
     # governance = models.TextField(blank=True, null=True)
     # strategy = models.TextField(blank=True, null=True)
     # talent_development_policy = models.TextField(blank=True, null=True)

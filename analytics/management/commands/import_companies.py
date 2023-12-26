@@ -27,7 +27,7 @@ class Command(BaseCommand):
                     market_product_classification = row["market_product_classification"],
                     esg_score = row["esg_score"],
                     grade_a_or_above = row["grade_a_or_above"],
-                    # sustainability_approach = row["sustainability_approach"],
+                    sustainability_approach = row["sustainability_approach"],
                     # governance = row["governance"],
                     # strategy = row["strategy"],
                     # talent_development_policy = row["talent_development_policy"],

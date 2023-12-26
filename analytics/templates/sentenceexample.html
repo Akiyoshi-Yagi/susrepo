@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>
+	例文    
+</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'analytics/styles/each_company.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="contents">
+	
+    <h1>{{ industry }}</h1>
+    <h1 id="keyword">{{ keyword }}</h1>
+    <h4 >{{ example_company1.company_name }}</h4>
+    <h4 id="text1">{{ example_company1.sustainability_approach }}</h4>
+
+    <h4 >{{ example_company2.company_name }}</h4>
+    <h4 id="text2">{{ example_company2.sustainability_approach }}</h4>
+</div>
+
+<script>
+    window.onload = function() {
+        var paragraph1 = document.getElementById("text1");
+        var paragraph2 = document.getElementById("text2");
+        var keyword = document.getElementById("keyword").innerHTML;
+        var text1 = paragraph1.innerHTML;
+        var text2 = paragraph2.innerHTML;
+        var modifiedText1 = text1.replaceAll(keyword, '<span style="color: red;font-weight: bold; font-size: 125%;">'+keyword+'</span>');
+        var modifiedText2 = text2.replaceAll(keyword, '<span style="color: red;font-weight: bold; font-size: 125%;">'+keyword+'</span>');
+        paragraph1.innerHTML = modifiedText1;
+        paragraph2.innerHTML = modifiedText2;
+    };
+</script>
+
+{% endblock %}

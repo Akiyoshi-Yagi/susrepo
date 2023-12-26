@@ -35,6 +35,8 @@
 		https://www.fsa.go.jp/policy/kaiji/sustainability01.pdf
 		</p>
 	</div>
+
+	{% if session %}
 	
 	<table class="char_num_table">
 		<tr>
@@ -152,7 +154,7 @@
 			<tr>
 				<th class="major_class" rowspan="15">各取り組みを行なっている企業の割合</th>
 				<th>企業価値向上を考慮した戦略・目標設定をしている</th>
-				{% if company.strategy_for_value_enhancement %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.strategy_for_value_enhancement %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=企業価値&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.strategy_for_value_enhancement}}</td>
 				<td>{{wr_sale_m.strategy_for_value_enhancement}}</td>
 				<td>{{wr_sale_l.strategy_for_value_enhancement}}</td>
@@ -160,7 +162,7 @@
 			</tr>
 			<tr>
 				<th>サステナビリティ推進の文脈でDXに取り組んでいる</th>
-				{% if company.dx_in_sustainability_context %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.dx_in_sustainability_context %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=DX&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.dx_in_sustainability_context}}</td>
 				<td>{{wr_sale_m.dx_in_sustainability_context}}</td>
 				<td>{{wr_sale_l.dx_in_sustainability_context}}</td>
@@ -168,7 +170,7 @@
 			</tr>
 			<tr>
 				<th>サステナ委員会・ワーキンググループを設置している</th>
-				{% if company.sustainability_committee_established %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.sustainability_committee_established %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=委員会&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.sustainability_committee_established}}</td>
 				<td>{{wr_sale_m.sustainability_committee_established}}</td>
 				<td>{{wr_sale_l.sustainability_committee_established}}</td>
@@ -176,7 +178,7 @@
 			</tr>
 			<tr>
 				<th>マテリアリティを策定している</th>
-				{% if company.materiality_established %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.materiality_established %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=マテリアリティ&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.materiality_established}}</td>
 				<td>{{wr_sale_m.materiality_established}}</td>
 				<td>{{wr_sale_l.materiality_established}}</td>
@@ -184,7 +186,7 @@
 			</tr>
 			<tr>
 				<th>サプライチェーンの透明化・効率化に取り組んでいる</th>
-				{% if company.supply_chain_transparency_and_efficiency %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.supply_chain_transparency_and_efficiency %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=サプライチェーン&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.supply_chain_transparency_and_efficiency}}</td>
 				<td>{{wr_sale_m.supply_chain_transparency_and_efficiency}}</td>
 				<td>{{wr_sale_l.supply_chain_transparency_and_efficiency}}</td>
@@ -192,7 +194,7 @@
 			</tr>
 			<tr>
 				<th>気候変動を考慮した事業展開をしている</th>
-				{% if company.climate_change_considered_in_business %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.climate_change_considered_in_business %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=気候変動&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.climate_change_considered_in_business}}</td>
 				<td>{{wr_sale_m.climate_change_considered_in_business}}</td>
 				<td>{{wr_sale_l.climate_change_considered_in_business}}</td>
@@ -200,7 +202,7 @@
 			</tr>
 			<tr>
 				<th>気候関連財務情報開示（TCFD）を行っている</th>
-				{% if company.climate_related_financial_disclosure %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.climate_related_financial_disclosure %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=TCFD&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.climate_related_financial_disclosure}}</td>
 				<td>{{wr_sale_m.climate_related_financial_disclosure}}</td>
 				<td>{{wr_sale_l.climate_related_financial_disclosure}}</td>
@@ -208,7 +210,7 @@
 			</tr>
 			<tr>
 				<th>温室効果ガス削減に取り組んでいる</th>
-				{% if company.greenhouse_gas_reduction_efforts %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.greenhouse_gas_reduction_efforts %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=温室効果ガス&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.greenhouse_gas_reduction_efforts}}</td>
 				<td>{{wr_sale_m.greenhouse_gas_reduction_efforts}}</td>
 				<td>{{wr_sale_l.greenhouse_gas_reduction_efforts}}</td>
@@ -216,7 +218,7 @@
 			</tr>
 			<tr>
 				<th>カーボンニュートラルに取り組んでいる</th>
-				{% if company.strategy_for_value_enhancement %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.strategy_for_value_enhancement %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=カーボンニュートラル&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.strategy_for_value_enhancement}}</td>
 				<td>{{wr_sale_m.strategy_for_value_enhancement}}</td>
 				<td>{{wr_sale_l.strategy_for_value_enhancement}}</td>
@@ -224,7 +226,7 @@
 			</tr>
 			<tr>
 				<th>スコープ３まで範囲に入れた検討ができている</th>
-				{% if company.scope_3_inclusion_in_analysis %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.scope_3_inclusion_in_analysis %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=スコープ３&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.scope_3_inclusion_in_analysis}}</td>
 				<td>{{wr_sale_m.scope_3_inclusion_in_analysis}}</td>
 				<td>{{wr_sale_l.scope_3_inclusion_in_analysis}}</td>
@@ -232,7 +234,7 @@
 			</tr>
 			<tr>
 				<th>障がい者の雇用に取り組んでいる</th>
-				{% if company.disability_employment_efforts %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.disability_employment_efforts %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=障がい者&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.disability_employment_efforts}}</td>
 				<td>{{wr_sale_m.disability_employment_efforts}}</td>
 				<td>{{wr_sale_l.disability_employment_efforts}}</td>
@@ -240,7 +242,7 @@
 			</tr>
 			<tr>
 				<th>エンゲージメントの調査を行なっている</th>
-				{% if company.engagement_survey_conducted %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.engagement_survey_conducted %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=エンゲージメント&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.engagement_survey_conducted}}</td>
 				<td>{{wr_sale_m.engagement_survey_conducted}}</td>
 				<td>{{wr_sale_l.engagement_survey_conducted}}</td>
@@ -248,7 +250,7 @@
 			</tr>
 			<tr>
 				<th>人権を尊重した社内制度、研修を行なっている</th>
-				{% if company.internal_systems_respecting_human_rights %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.internal_systems_respecting_human_rights %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=人権&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.internal_systems_respecting_human_rights}}</td>
 				<td>{{wr_sale_m.internal_systems_respecting_human_rights}}</td>
 				<td>{{wr_sale_l.internal_systems_respecting_human_rights}}</td>
@@ -256,7 +258,7 @@
 			</tr>
 			<tr>
 				<th>ダイバーシティを尊重した人事制度を採用している</th>
-				{% if company.diversity_respecting_hr_policy %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.diversity_respecting_hr_policy %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=ダイバーシティ&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.diversity_respecting_hr_policy}}</td>
 				<td>{{wr_sale_m.diversity_respecting_hr_policy}}</td>
 				<td>{{wr_sale_l.diversity_respecting_hr_policy}}</td>
@@ -264,7 +266,7 @@
 			</tr>
 			<tr>
 				<th>女性管理職の積極登用をおこなっている</th>
-				{% if company.proactive_hiring_of_female_managers %}<td class="referred">言及あり</td>{% else %}<td class="not_referred">言及なし</td>{% endif %}
+				{% if company.proactive_hiring_of_female_managers %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=女性管理職&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.proactive_hiring_of_female_managers}}</td>
 				<td>{{wr_sale_m.proactive_hiring_of_female_managers}}</td>
 				<td>{{wr_sale_l.proactive_hiring_of_female_managers}}</td>
@@ -285,6 +287,11 @@
             <button type="submit" class="generation-button">生成する</button>
         </form>
     </div>
+
+	{% else %}
+    ここから先はログイン後利用可能です。
+    <a href="{% url 'login' %}">ログインはこちら</a>
+    {% endif %}
 </div>
 
 {% endblock %}
