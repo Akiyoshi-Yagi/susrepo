@@ -2,7 +2,7 @@
 
 {% block title %}
 <title>
-	文章テンプレ  
+	文章テンプレ
 </title>
 {% load static %}
 
@@ -48,21 +48,23 @@
                 </h3>
             </br>
         </div>
-        <div class="each_contianer">    
+        <div class="each_contianer">
             <h2 class="section" name="term1" id="1_0" >{{section1.heading}}</h2>
             <div class="output-area" id="outputText">
                 <div class="output-text">
                     <textarea id="1_6" name="category1_6"  placeholder="小売業界の指標及び目標のデフォルトの文章">
                         {% if response_sentence_1 %}
                                 {{ response_sentence_1 }}
+                                <h1>aaa</h1>
                         {% else %}
                             {{section1.default_sentence}}
+                            <h1>bbb</h1>
                         {% endif %}
                     </textarea>
                 </div>
             </div>
         </div>
-        <div class="each_contianer">    
+        <div class="each_contianer">
             <h2 class="section" name="term12" id="2_0" >{{section2.heading}}</h2>
             <div class="output-area" id="outputText">
                 <div class="output-text">
@@ -76,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="each_contianer">    
+        <div class="each_contianer">
             <h2 class="section" name="term3" id="3_0" >{{section3.heading}}</h2>
             <div class="output-area" id="outputText">
                 <div class="output-text">
@@ -90,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <div class="each_contianer">    
+        <div class="each_contianer">
             <h2 class="section" name="term4" id="4_0" >{{section4.heading}}</h2>
             <div class="output-area" id="outputText">
                 <div class="output-text">
@@ -104,7 +106,7 @@
                 </div>
             </div>
         </div>
-        <div class="each_contianer">    
+        <div class="each_contianer">
             <h2 class="section" name="term5" id="5_0" >{{section5.heading}}</h2>
             <div class="output-area" id="outputText">
                 <div class="output-text">
@@ -118,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <div class="each_contianer">    
+        <div class="each_contianer">
             <h2 class="section" name="term6" id="6_0" >{{section6.heading}}</h2>
             <div class="output-area" id="outputText">
                 <div class="output-text">
@@ -151,7 +153,7 @@
     ログイン後利用可能です。
     <a href="{% url 'login' %}">ログインはこちら</a>
     {% endif %}
-    
+
 </div>
 
 <script>
@@ -163,18 +165,18 @@ function fetchDefaultSettings() {
         .then(data => {
             const settingsList = document.getElementById('settingsList'+ String(1));
             var i = 1;
-            
+
             data.settings.forEach(setting => {
                 const heading = document.getElementById(String(i)+"_0");
                 const defaultsentence = document.getElementById(String(i)+"_6");
 
                 heading.innerHTML = `<strong>${setting.heading}</strong>`;
                 defaultsentence.innerHTML = `${setting.default_sentence}`;
-                
+
                 i += 1;
-                
+
             });
-            
+
         });
 }
 function updateCombinedText() {
@@ -193,7 +195,7 @@ function updateCombinedText() {
     document.getElementById('4_6').addEventListener('input', updateCombinedText);
     document.getElementById('5_6').addEventListener('input', updateCombinedText);
     document.getElementById('6_6').addEventListener('input', updateCombinedText);
-    
+
     // 初期表示時にもテキストを更新
     updateCombinedText();
 
