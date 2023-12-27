@@ -70,3 +70,9 @@ obara-taichi@g.ecc.u-tokyo.ac.jp
 passは
 1234aaa#
 
+
+
+## 知りたいこと
+- 有報情報取得の方法
+- DB追加
+-
