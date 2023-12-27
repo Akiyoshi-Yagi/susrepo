@@ -13,6 +13,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv, find_dotenv
+import environ
+
+
+env = environ.Env()
+env.read_env('.env')
+
+DEBUG = env('DEBUG')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,11 +34,6 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "analytics", "templates")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-jq-7ei3n)m0gei_*%-wb*=f-bj%9ofr$o5@(_1_t*q95mrk!c%'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 STATIC_URL = '/static/'
 
@@ -83,10 +87,8 @@ WSGI_APPLICATION = 'yuhoapp.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db(),
+    
 }
 
 
@@ -121,11 +123,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -138,7 +135,7 @@ if ENV_FILE:
 
 
 # Load Auth0 application settings into memory
-AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
-AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
-AUTH0_CLIENT_SECRET = os.environ.get("AUTH0_CLIENT_SECRET")
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+AUTH0_DOMAIN = env("AUTH0_DOMAIN")
+AUTH0_CLIENT_ID = env("AUTH0_CLIENT_ID")
+AUTH0_CLIENT_SECRET = env("AUTH0_CLIENT_SECRET")
+OPENAI_API_KEY = env("OPENAI_API_KEY")
