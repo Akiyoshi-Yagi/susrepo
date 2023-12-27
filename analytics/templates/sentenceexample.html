@@ -5,21 +5,26 @@
 	例文    
 </title>
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'analytics/styles/each_company.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'analytics/styles/sentenceexample.css' %}">
 {% endblock %}
 
 
 {% block content %}
 
 <div class="contents">
-	
-    <h1>{{ industry }}</h1>
-    <h1 id="keyword">{{ keyword }}</h1>
-    <h4 >{{ example_company1.company_name }}</h4>
-    <h4 id="text1">{{ example_company1.sustainability_approach }}</h4>
+    <h2 class="industry">{{ industry }}</h2>
+    <h2 class="keyword" id="keyword">{{ keyword }}</h2>
+    <h4>{{ industry }}業界の{{ keyword }}に関する記載がある企業のサステナビリティに関する記述を表示している。これをもとに、同業界の競合他社がどのようなサステナビリティの活動をして、どのような記述を行っているかがわかる。</h2>
+    <h4 class="explain">※赤文字でキーワードをハイライトしている</h4>
+    <div class="ex1">
+        <h2 class="company1">{{ example_company1.company_name }}</h2>
+        <h4 class="text1" id="text1">{{ example_company1.sustainability_approach }}</h4>
+    </div>
 
-    <h4 >{{ example_company2.company_name }}</h4>
-    <h4 id="text2">{{ example_company2.sustainability_approach }}</h4>
+    <div class="ex2">
+        <h2 class="company2">{{ example_company2.company_name }}</h2>
+        <h4 class="text2" id="text2">{{ example_company2.sustainability_approach }}</h4>
+    </div>
 </div>
 
 <script>

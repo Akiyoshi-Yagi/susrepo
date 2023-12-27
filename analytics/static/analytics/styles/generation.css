@@ -3,29 +3,18 @@
     margin-top: 100px;
     width:80%;
 }
-.container {
-    display: flex;
-}
 
-.input-area {
-    border: 2px solid #000;
-    margin-bottom: 20px;
-}
-.left-side, .right-side {
+.right-side {
     flex: 1;
     padding: 10px 10px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
+.each_contianer{
+    margin-bottom: 100px;
+    height: 500px;
 
-.default-text {
-    padding: 10px;
-    margin: 0;
-    height: 80%;
-}
-.input-area {
-    flex: 1;
 }
 
 .section {
@@ -62,7 +51,7 @@ textarea {
     box-sizing: border-box;
     border: none;
     resize: none;
-    padding: 20px;
+    padding: 10px;
     margin: 0;
 }
 
@@ -71,21 +60,19 @@ textarea {
     padding: 10px;
     height: calc(100%);
     border: 2px solid #000;
-    margin-bottom: 20px;
+  
 
 }
 
 .output-text {
     background-color: #e0e0e0;
     padding: 0px;
-    height: calc(100% - 40px);
-    border: 2px solid #000;
-    margin-bottom: 20px;
-    
+    height: calc(100%);
+    border: 2px solid #000; 
 }
 
 .industry-selection{
-    margin-top: 50px;
+    margin-top: 0px;
     margin-bottom: 50px;
 }
 
@@ -114,55 +101,5 @@ textarea {
     box-shadow: 0px 0px 6px #87ceeb; /* ボックスシャドウのスタイルを変更 */
 }
 
-.button-container {
-    margin-top: 5px;
-    display: flex;
-    justify-content: center;
-}
 
-.button-container input[type=submit] {
-    background-color: #40a9eb; /* 緑色の背景 */
-    color: white; /* 白色のテキスト */
-    padding: 15px 32px; /* 上下と左右のパディング */
-    text-align: center; /* テキストを中央揃えに */
-    text-decoration: none; /* テキストの装飾を無効に */
-    display: inline-block; /* インラインブロックとして表示 */
-    font-size: 20px; /* フォントサイズを大きく */
-    margin: 4px 2px; /* マージン */
-    cursor: pointer; /* カーソルをポインターに */
-    border: none; /* ボーダー無し */
-    border-radius: 8px; /* 角を丸く */
-    box-shadow: 0 4px #999; /* 影をつける */
-}
 
-.button-container input[type=submit]:hover {
-    background-color: #1327da; /* ホバー時の背景色を変更 */
-    box-shadow: 0 5px #666; /* ホバー時の影を変更 */
-    transform: translateY(-2px); /* 上に少し移動 */
-}
-
-.each_contianer{
-    margin-bottom: 100px;
-}
-
-.generated_sentence{
-    flex: 1;
-    padding: 10px 10px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    background-color: #e0e0e0;
-    padding: 10px;
-    height: calc(100%);
-    border: 2px solid #000;
-    margin-bottom: 20px;
-}
-
-.innercontents{
-    background-color: white;
-    padding: 0px;
-    height: calc(100% - 40px);
-    border: 2px solid #000;
-    margin-bottom: 20px;
-
-}

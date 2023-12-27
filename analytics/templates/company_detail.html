@@ -152,7 +152,7 @@
 				<td class="compamy_num_column">{{wr_esg_score.company_number}}</td>
 			</tr>
 			<tr>
-				<th class="major_class" rowspan="15">各取り組みを行なっている企業の割合</th>
+				<th class="major_class" rowspan="5">サステナ全般</th>
 				<th>企業価値向上を考慮した戦略・目標設定をしている</th>
 				{% if company.strategy_for_value_enhancement %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=企業価値&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.strategy_for_value_enhancement}}</td>
@@ -193,6 +193,7 @@
 				<td>{{wr_esg_score.supply_chain_transparency_and_efficiency}}</td>
 			</tr>
 			<tr>
+				<th class="major_class" rowspan="5">気候変動</th>
 				<th>気候変動を考慮した事業展開をしている</th>
 				{% if company.climate_change_considered_in_business %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=気候変動&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.climate_change_considered_in_business}}</td>
@@ -233,6 +234,7 @@
 				<td>{{wr_esg_score.scope_3_inclusion_in_analysis}}</td>
 			</tr>
 			<tr>
+				<th class="major_class" rowspan="5">人的資本</th>
 				<th>障がい者の雇用に取り組んでいる</th>
 				{% if company.disability_employment_efforts %}<td class="referred">言及あり</td>{% else %}<td class="not_referred"><a href="{% url 'sentence_example' %}?keyword=障がい者&industry={{ company.industry_classification }}">言及なし</a></td>{% endif %}
 				<td>{{wr_sale_s.disability_employment_efforts}}</td>
@@ -275,18 +277,6 @@
 
 		</tbody>
 	</table>
-
-	<div class="sentence">
-		<p>
-			以上の分析をもとに、有価証券報告書のサステナビリティ章を記述するのが良いでしょう。
-			しかしながら、一から文章を記述するのは大変です。そこで、サステナビリティ章の文章を自動生成するアプリケーションを利用してみましょう。
-		</p>
-	</div>
-	<div class="generation-container">
-        <form method="get" action="{% url 'generation' %}">
-            <button type="submit" class="generation-button">生成する</button>
-        </form>
-    </div>
 
 	{% else %}
     ここから先はログイン後利用可能です。
