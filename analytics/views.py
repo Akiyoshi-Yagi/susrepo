@@ -114,8 +114,6 @@ def sentence_example(request):
 def get_settings(request):
     industry = request.GET.get('industry')
     settings = InputCategory.objects.filter(industry__icontains=industry).values('heading','category1','category2','category3','category4','category5',"default_sentence")
-    print("get_settings")
-    print(settings)
     return JsonResponse({'settings': list(settings)})
 
 def generate_sentence(request):
@@ -174,20 +172,3 @@ def generate_sentence(request):
 
     # GETリクエストの場合、またはフォームが正しく送信されなかった場合
     return render(request, 'generation.html', response_dict)
-
-        # データを結合
-        # initial_sentence = "あなたは" + "小売業界" + "の企業の有価証券報告書の担当者です。以下の内容に沿って、有価証券報告書のサステナビリティ欄の" + "指標及び目標" + "に記載する文章を作成してください。"
-        # combined_data = initial_sentence + f"{category1}\n{category2}\n{category3}\n{category4}\n{category5}\n{category6}"
-
-        # APIにデータを送信し、レスポンスを受け取る
-        # api_url = 'あなたのAPIのURL'
-        # response = requests.post(api_url, data={'combined_data': combined_data})
-
-        # # APIからのレスポンスを処理（例: JSON形式のレスポンスを想定）
-        # if response.status_code == 200:
-        #     response_data = response.json()
-        #     # 必要に応じてレスポンスデータを処理
-
-        #     # 結果をテンプレートに渡す
-        #     return render(request, 'generation.html', {'response_data': response_data})
-
