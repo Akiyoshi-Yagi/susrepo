@@ -108,9 +108,6 @@ def sentence_example(request):
         }
     )
 
-
-
-
 def get_settings(request):
     industry = request.GET.get('industry')
     settings = InputCategory.objects.filter(industry__icontains=industry).values('heading','category1','category2','category3','category4','category5',"default_sentence")
@@ -121,7 +118,6 @@ def generate_sentence(request):
 
     response_dict = {'industries': industries, "session": request.session.get("user"), "pretty": json.dumps(request.session.get("user"), indent=4),}
 
-
     response_dict['section1'] = InputCategory.objects.filter(industry__icontains="小売")[0]
     response_dict['section2'] = InputCategory.objects.filter(industry__icontains="小売")[1]
     response_dict['section3'] = InputCategory.objects.filter(industry__icontains="小売")[2]
@@ -129,46 +125,4 @@ def generate_sentence(request):
     response_dict['section5'] = InputCategory.objects.filter(industry__icontains="小売")[4]
     response_dict['section6'] = InputCategory.objects.filter(industry__icontains="小売")[5]
 
-    if request.method == 'POST':
-        set_industry = request.POST.get('set_industry')
-
-        response_dict['section1'] = InputCategory.objects.filter(industry__icontains=set_industry)[0]
-        response_dict['section2'] = InputCategory.objects.filter(industry__icontains=set_industry)[1]
-        response_dict['section3'] = InputCategory.objects.filter(industry__icontains=set_industry)[2]
-        response_dict['section4'] = InputCategory.objects.filter(industry__icontains=set_industry)[3]
-        response_dict['section5'] = InputCategory.objects.filter(industry__icontains=set_industry)[4]
-        response_dict['section6'] = InputCategory.objects.filter(industry__icontains=set_industry)[5]
-
-        for i in range(1,7):
-
-            if "generation"+str(i) in request.POST:
-
-                for j in range(1,7):
-                    if i == j:
-                        openai.api_key = settings.OPENAI_API_KEY
-
-                        category_1 = request.POST.get('category'+str(i)+'_1')
-                        category_2 = request.POST.get('category'+str(i)+'_2')
-                        category_3 = request.POST.get('category'+str(i)+'_3')
-                        category_4 = request.POST.get('category'+str(i)+'_4')
-                        category_5 = request.POST.get('category'+str(i)+'_5')
-
-                        section =  InputCategory.objects.filter(industry__icontains=set_industry)[i-1]
-
-                        prompt = f"あなたは企業の有価証券報告書作成のエキスパートである。{section.industry}に属するとある企業XXX社の有価証券報告書のサステナビリティの章の{section.heading}の項目の文章を生成してください。次の条件を満たしてください。1. 項目分けせずに、一つなぎの文章で生成してください。2. 800字以上1000字以下でお願いします。3. 「当社は、〜。{section.category1}においては〜。{section.category2}に関しては〜。{section.category3}においては〜。{section.category4}に関しては〜。{section.category5}には〜。」という文章フレームで書いてください。4. 文章の内容は、{section.category1}:{category_1}。{section.category2}:{category_2}。{section.category3}:{category_3}。{section.category4}:{category_4}。{section.category5}:{category_5}。をもとにかく。これ以外の嘘の内容を書いてはいけない。"
-
-                        response = openai.ChatCompletion.create(
-                            model="gpt-4-1106-preview",
-                            messages=[
-                                {"role": "user", "content": prompt}
-                                ])
-
-
-                        response_dict["response_sentence_"+str(j)] = response['choices'][0]['message']['content']
-                    else:
-                        response_dict["response_sentence_"+str(j)] = request.POST.get('category'+str(j)+'_6')
-                return render(request, 'generation.html' , response_dict)
-        return render(request, 'generation.html', response_dict)
-
-    # GETリクエストの場合、またはフォームが正しく送信されなかった場合
     return render(request, 'generation.html', response_dict)

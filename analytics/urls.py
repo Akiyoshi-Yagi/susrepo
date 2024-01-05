@@ -6,13 +6,13 @@ urlpatterns = [
     path("logout", views.logout, name="logout"),
     path("callback", views.callback, name="callback"),
 
-    path('search/', views.search_view, name='search'),
+    path('home/', views.search_view, name='search'),
     path('company/<int:id>/', views.company_detail, name='company_detail'),
-    path('sentenceexample/', views.sentence_example, name='sentence_example'),
+    path('example/', views.sentence_example, name='sentence_example'),
 
 
-    path('generation/', views.generate_sentence, name='generation'),
-    path('generation/get-settings/', views.get_settings, name='get_settings'),
+    path('template/', views.generate_sentence, name='generation'),
+    path('template/get-settings/', views.get_settings, name='get_settings'),
 
     
 ]
