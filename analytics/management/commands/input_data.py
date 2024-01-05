@@ -8,6 +8,10 @@ class Command(BaseCommand):
     help = 'Import companies from a CSV file'
 
     def handle(self, *args, **kwargs):
+        Company.objects.all().delete()
+        CharacterNum.objects.all().delete()
+        WordRate.objects.all().delete()
+        InputCategory.objects.all().delete()
         with open(os.path.join(BASE_DIR, 'yuho_data/個別企業情報.csv'), newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             n=0
